@@ -1,0 +1,19 @@
+{
+  "name": "automacao",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "puppeteer": "^25.18.1"
+  },
+  "allowScripts": {
+    "puppeteer@25.18.1": true
+  }
+}

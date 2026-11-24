@@ -1,0 +1,24 @@
+# Dependências
+node_modules/
+
+# Banco de dados local
+data/*.db
+data/*.db-wal
+data/*.db-shm
+
+# Screenshots gerados
+screenshots/*.png
+screenshots/*.jpg
+screenshots/*.jpeg
+
+# Arquivos temporários
+*.log
+tmp/
+temp/
+.tmp/
+
+# Informações sensíveis
+.env
+.env.*
+*.key
+*.pem
