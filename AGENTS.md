@@ -4,7 +4,7 @@ Guia para agentes de IA (OpenCode) trabalhando neste repositório.
 
 ## Visão geral
 
-Projeto Node.js (CommonJS) de automação que coleta a notícia mais recente do portal G1 (g1.globo.com) usando Puppeteer. Executa em modo headless e imprime título, data de publicação e link da notícia no console.
+Projeto Node.js (CommonJS) de automação que coleta a notícia mais recente do portal G1 (g1.globo.com) usando Puppeteer. Executa por padrão em modo headless (configurável via `HEADLESS=false` para modo visual) e imprime título, data de publicação e link da notícia no console.
 
 - Entrada: `src/index.js`
 - Saída: console (stdout/stderr)
@@ -16,9 +16,13 @@ Projeto Node.js (CommonJS) de automação que coleta a notícia mais recente do 
 # Instalar dependências
 npm install
 
-# Executar a coleta
+# Executar a coleta (headless, padrão)
 npm start
 # equivalente a: node src/index.js
+
+# Executar em modo visual (headed)
+HEADLESS=false npm start
+# equivalente a: npm run start:visual
 ```
 
 Não há testes, lint ou build configurados. Valide manualmente executando `npm start` (requer acesso à internet e ao site do G1).
@@ -58,6 +62,7 @@ Fluxo: `index.js` → `launchBrowser()` → `collectLatestNews(page)` → `colle
 
 - O scraping depende da estrutura HTML do G1 (seletores `.feed-post`, `a.feed-post-link`, `meta[property="article:published_time"]`, JSON-LD). Alterações no site podem quebrar a coleta — teste com `npm start`.
 - `launchBrowser` aceita `options` mescladas após os args padrão; não remova as flags `--no-sandbox`/`--disable-setuid-sandbox` (ambiente pode não ter sandbox).
+- Modo de execução controlado por `HEADLESS` (padrão `true`/headless); `HEADLESS=false` abre o navegador visualmente. Em WSL, `DISPLAY` é configurado automaticamente para `:0` quando ausente. Configuração centralizada em `src/browser/puppeteer.js` (não duplicar).
 - Timeouts de navegação: 60s (goto), 20s (waitForSelector do feed), 10s (h1). Ajuste com cuidado.
 - Datas são formatadas para `pt-BR` no fuso `America/Sao_Paulo` via `Intl.DateTimeFormat`. Mantenha esse comportamento.
 - `collectNews` retorna `{ items, screenshots }` (atualmente 1 item em `items` ou `[]`); `collectLatestNews` consome apenas o primeiro item (`items[0]`).

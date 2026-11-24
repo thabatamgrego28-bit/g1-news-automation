@@ -1,7 +1,7 @@
-const puppeteer = require('puppeteer');
+const { launchBrowser } = require('./src/browser/puppeteer');
 
 (async () => {
-  const browser = await puppeteer.launch({ headless: true });
+  const browser = await launchBrowser();
   const page = await browser.newPage();
 
   await page.goto('https://www.google.com');
@@ -10,4 +10,3 @@ const puppeteer = require('puppeteer');
 
   await browser.close();
 })();
-

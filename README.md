@@ -29,10 +29,31 @@ npm install
 
 ## Execução
 
+Modo headless (padrão, sem exibir o navegador):
+
 ```bash
 npm start
 # equivalente a: node src/index.js
 ```
+
+Modo visual (headed, abre o navegador Chrome durante a automação):
+
+```bash
+HEADLESS=false npm start
+# equivalente a: HEADLESS=false node src/index.js
+# ou: npm run start:visual
+```
+
+A variável de ambiente `HEADLESS` controla o modo de execução:
+
+- `HEADLESS=true` (ou não definida): execução em segundo plano (padrão).
+- `HEADLESS=false`: abre o navegador visualmente.
+
+No Ubuntu via WSL, o modo visual utiliza o display do WSLg (`DISPLAY=:0`)
+automaticamente quando disponível; caso a variável `DISPLAY` não esteja definida,
+o projeto a configura para `:0`. Certifique-se de estar em um WSL2 com WSLg
+habilitado (Windows 11 ou Windows 10 atualizado) para que a janela do Chrome
+seja exibida.
 
 Ao final da execução, o terminal exibe um resumo com título, data de publicação,
 link, status de armazenamento, total de notícias armazenadas, screenshots salvos
